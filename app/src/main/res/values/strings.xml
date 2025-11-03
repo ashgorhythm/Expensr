@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Expensr</string>
+
+    <string name="onboarding_title_1">Track Every Expense</string>
+    <string name="onboarding_desc_1">Easily log your daily spending and see where your money goes — all in one place.</string>
+
+    <string name="onboarding_title_2">Stay on Budget</string>
+    <string name="onboarding_desc_2">Set monthly limits and get insights to help you control your expenses effortlessly.</string>
+
+    <string name="onboarding_title_3">Achieve Financial Goals</string>
+    <string name="onboarding_desc_3">Save smarter and reach your financial targets faster with personalized reports.</string>
+</resources>
