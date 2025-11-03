@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.ashgorhythm.expensr.presentation.screens.OnboardingScreen
 import com.ashgorhythm.expensr.ui.theme.ExpensrTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,8 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ExpensrTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                }
+                OnboardingScreen()
             }
         }
     }
