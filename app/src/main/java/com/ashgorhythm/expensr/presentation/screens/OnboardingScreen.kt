@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun OnboardingScreen(){
+fun OnboardingScreen(onClick: () -> Unit){
     val pages = listOf(
         OnboardingPage.First,
         OnboardingPage.Second,
@@ -63,7 +63,8 @@ fun OnboardingScreen(){
                     }
                 },
                 onFinishClick = {
-                    CoroutineScope(Dispatchers.IO).launch {
+                    onClick()
+                    coroutineScope.launch {
                         onboardingPrefs.saveOnboardingCompleted(true)
                     }
                 }
