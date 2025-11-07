@@ -63,6 +63,9 @@ fun OnboardingScreen(onClick: () -> Unit){
                     }
                 },
                 onFinishClick = {
+                    coroutineScope.launch {
+                        onboardingPrefs.saveOnboardingCompleted(true)
+                    }
                     onClick()
                 }
             )
