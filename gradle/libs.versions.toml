@@ -10,6 +10,7 @@ activityCompose = "1.11.0"
 composeBom = "2024.09.00"
 kotlinSerialization = "2.1.21"
 kotlinxSerializationCore = "1.8.1"
+navVersion = "2.9.6"
 
 
 [libraries]
@@ -28,7 +29,7 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
-
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navVersion"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
