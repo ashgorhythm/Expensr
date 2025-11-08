@@ -1,28 +1,31 @@
 package com.ashgorhythm.expensr.navigation.navgraph
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.ashgorhythm.expensr.navigation.screen.AUTH_ROUTE
-import com.ashgorhythm.expensr.navigation.screen.ONBOARD_ROUTE
-import com.ashgorhythm.expensr.viewmodel.OnboardingViewModel
+import com.ashgorhythm.expensr.viewmodel.RootViewModel
+import com.ashgorhythm.expensr.viewmodel.RootViewModelFactory
 
+@SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun RootNavGraph(){
     val context = LocalContext.current
     val navHostController = rememberNavController()
-    val onboardingViewModel = OnboardingViewModel(context)
-    val isOnboardingCompleted by onboardingViewModel.onboardingCompleted.collectAsState()
-    NavHost(
-        navController = navHostController,
-        startDestination = if (isOnboardingCompleted) AUTH_ROUTE else ONBOARD_ROUTE
-    ){
-        OnboardNavGraph(navHostController)
-        AuthNavGraph(navHostController)
+    val rootViewModel: RootViewModel = viewModel(factory = RootViewModelFactory(context))
+    val startDestination by rootViewModel.startDestination.collectAsState()
+    if (startDestination != null){
+        NavHost(
+            navController = navHostController,
+            startDestination = startDestination!!
+        ){
+            OnboardNavGraph(navHostController)
+            AuthNavGraph(navHostController)
+        }
     }
+
 }
