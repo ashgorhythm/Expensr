@@ -1,7 +1,6 @@
 package com.ashgorhythm.expensr.presentation.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -18,18 +16,23 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
 import com.ashgorhythm.expensr.data.datastore.OnboardingPreferences
+import com.ashgorhythm.expensr.navigation.screen.AUTH_ROUTE
+import com.ashgorhythm.expensr.navigation.screen.ONBOARD_ROUTE
+import com.ashgorhythm.expensr.navigation.screen.ScreenRoute
 import com.ashgorhythm.expensr.presentation.components.OnboardingBottomBar
 import com.ashgorhythm.expensr.presentation.components.OnboardingPage
 import com.ashgorhythm.expensr.presentation.components.PagerIndicator
 import com.ashgorhythm.expensr.presentation.components.PagerScreen
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.ashgorhythm.expensr.viewmodel.OnboardingViewModel
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun OnboardingScreen(onClick: () -> Unit){
+fun OnboardingScreen(
+    navHostController: NavHostController
+){
     val pages = listOf(
         OnboardingPage.First,
         OnboardingPage.Second,
@@ -41,7 +44,7 @@ fun OnboardingScreen(onClick: () -> Unit){
     )
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
-    val onboardingPrefs = remember { OnboardingPreferences(context) }
+    val onboardingViewModel = OnboardingViewModel(context)
 
 
     Scaffold(
@@ -63,10 +66,14 @@ fun OnboardingScreen(onClick: () -> Unit){
                     }
                 },
                 onFinishClick = {
+                    onboardingViewModel.setCompleted()
                     coroutineScope.launch {
-                        onboardingPrefs.saveOnboardingCompleted(true)
+                        navHostController.navigate(AUTH_ROUTE){
+                            popUpTo(ONBOARD_ROUTE){
+                                inclusive = true
+                            }
+                        }
                     }
-                    onClick()
                 }
             )
         }
