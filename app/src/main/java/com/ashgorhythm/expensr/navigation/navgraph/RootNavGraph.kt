@@ -8,6 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.ashgorhythm.expensr.viewmodel.AuthViewModel
 import com.ashgorhythm.expensr.viewmodel.RootViewModel
 import com.ashgorhythm.expensr.viewmodel.RootViewModelFactory
 
@@ -17,6 +18,7 @@ fun RootNavGraph(){
     val context = LocalContext.current
     val navHostController = rememberNavController()
     val rootViewModel: RootViewModel = viewModel(factory = RootViewModelFactory(context))
+    val authViewModel: AuthViewModel = viewModel()
     val startDestination by rootViewModel.startDestination.collectAsState()
     if (startDestination != null){
         NavHost(
@@ -24,7 +26,8 @@ fun RootNavGraph(){
             startDestination = startDestination!!
         ){
             OnboardNavGraph(navHostController)
-            AuthNavGraph(navHostController)
+            AuthNavGraph(navHostController,authViewModel)
+            HomeNavGraph(navHostController)
         }
     }
 

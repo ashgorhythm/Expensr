@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun OnboardingScreen(
-    navHostController: NavHostController
+    onOnboardingCompleted: () -> Unit
 ){
     val pages = listOf(
         OnboardingPage.First,
@@ -68,11 +68,7 @@ fun OnboardingScreen(
                 onFinishClick = {
                     onboardingViewModel.setCompleted()
                     coroutineScope.launch {
-                        navHostController.navigate(AUTH_ROUTE){
-                            popUpTo(ONBOARD_ROUTE){
-                                inclusive = true
-                            }
-                        }
+                        onOnboardingCompleted()
                     }
                 }
             )

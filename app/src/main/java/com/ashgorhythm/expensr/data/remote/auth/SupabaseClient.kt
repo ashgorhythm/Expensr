@@ -2,6 +2,7 @@ package com.ashgorhythm.expensr.data.remote.auth
 
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.auth.Auth
+import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 
@@ -18,4 +19,5 @@ object SupabaseClient {
             }
         }
     }
+    val auth = client.auth
 }
