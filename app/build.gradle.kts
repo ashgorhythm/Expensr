@@ -68,7 +68,6 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:compose-auth" )
     implementation("io.github.jan-tennert.supabase:compose-auth-ui" )
     implementation("io.github.jan-tennert.supabase:realtime-kt" )
-    //implementation("io.github.jan-tennert.supabase:gotrue-kt")
     implementation("io.ktor:ktor-client-android:${ktorVersion}")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

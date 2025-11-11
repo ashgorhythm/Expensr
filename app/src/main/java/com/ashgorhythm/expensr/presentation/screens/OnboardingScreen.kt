@@ -28,7 +28,7 @@ import com.ashgorhythm.expensr.presentation.components.PagerScreen
 import com.ashgorhythm.expensr.viewmodel.OnboardingViewModel
 import kotlinx.coroutines.launch
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "ViewModelConstructorInComposable")
 @Composable
 fun OnboardingScreen(
     onOnboardingCompleted: () -> Unit

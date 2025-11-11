@@ -8,16 +8,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.ashgorhythm.expensr.R
 
 @Composable
 fun OnboardingBottomBar(
@@ -42,7 +41,7 @@ fun OnboardingBottomBar(
                 shape = RoundedCornerShape(12.dp),
                 modifier = modifier.size(width = buttonWidth, height = buttonHeight)
             ) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack,"Back")
+                Icon(painter = painterResource(R.drawable.outline_arrow_back_24),"Back")
             }
         }else {
             // Placeholder to keep layout balanced
@@ -54,7 +53,7 @@ fun OnboardingBottomBar(
                 shape = RoundedCornerShape(12.dp),
                 modifier = modifier.size(width = buttonWidth, height = buttonHeight)
             ) {
-                Icon(Icons.AutoMirrored.Filled.ArrowForward,"Next")
+                Icon(painter = painterResource(R.drawable.outline_arrow_forward_24),"Next")
             }
         }else {
             Button(
