@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -85,8 +84,7 @@ fun LoginScreen(
             value = password,
             onValueChange = { password = it },
             label = {Text("Password")},
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardActions = KeyboardActions(onDone = { onLoginSuccess()})
+            visualTransformation = PasswordVisualTransformation()
 
         )
         Spacer(modifier = modifier.height(16.dp))
