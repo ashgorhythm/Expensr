@@ -7,17 +7,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -55,6 +59,7 @@ fun SignUpScreen(
     var password by remember { mutableStateOf("") }
     var showRules by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
+    val scrollState = rememberScrollState()
     val conditions = listOf(
         password.length >= 8,
         password.any { it.isLowerCase() },
@@ -76,6 +81,9 @@ fun SignUpScreen(
         "One special character",
     )
     Scaffold(
+        modifier = Modifier
+            .fillMaxSize(),
+        contentWindowInsets = WindowInsets(0,0,0,0),
         snackbarHost = {
             SnackbarHost(
                 hostState = snackbarHostState,
@@ -90,15 +98,22 @@ fun SignUpScreen(
             )
         }
     ){innerPadding ->
-        LazyColumn(
-            modifier = modifier
+        Box(
+            modifier = Modifier
                 .fillMaxSize()
+                .padding(innerPadding)
                 .imePadding()
-                .padding(innerPadding),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            item {
+                .navigationBarsPadding(),
+            contentAlignment = Alignment.Center
+        ){
+            Column (
+                modifier = modifier
+                    .fillMaxSize()
+                    .verticalScroll(scrollState)
+                    .padding(horizontal = 16.dp, vertical = 24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 Image(
                     modifier = modifier
                         .fillMaxWidth()
@@ -145,7 +160,7 @@ fun SignUpScreen(
                     modifier = modifier
                         .fillMaxWidth()
                         .height(8.dp)
-                        .background(Color.LightGray.copy(0.5f))
+                        .background(Color.Transparent)
                 ){
                     Box(
                         modifier = Modifier
@@ -180,6 +195,7 @@ fun SignUpScreen(
                     if (uiState.isAuthenticated) onSignUpSuccess()
                 }
             }
+
         }
     }
 }
